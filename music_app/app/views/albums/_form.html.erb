@@ -1,0 +1,57 @@
+<% if action == :new %>
+  <% action_url = albums_url %>
+  <% submit_button = "Create New Album" %>
+  <% title = "" %>
+  <% year = ""%>
+  <% live = "" %>
+<% else %>
+  <% action_url = album_url(@album) %>
+  <% submit_button = "Edit Album" %>
+  <% title = @album.title %>
+  <% year = @album.year %>
+  <% live = @album.live %>
+<% end %>
+
+  <form action="<%= action_url %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+    <% if action == :edit %>
+      <%= @album.title %>
+      <br>
+      <br>
+      <input type="hidden" name="_method" value="patch">
+    <% end %>
+
+    <label>
+      Title
+      <input type="text" name="album[title]" value="<%= title %>">
+      <br><br>
+      <% if flash.now[:errors] %>
+        <% flash.now[:errors].each do |error| %>
+          <%= error %>
+        <% end %>
+        <br><br>
+      <% end %>
+      Band Name
+      <select name="album[band_id]">
+        <option value="">--SELECT FROM BELOW--</option>
+        <% @bands.each do |band| %>
+          <option value="<%= band.id %>"><%= band.name %></option>
+        <% end %>
+      </select>
+      <br><br>
+      Year
+      <input type="text" name="album[year]" value="<%= year %>">
+      <br><br>
+      Live <input type="radio" name="album[live]" value="true">
+      Studio <input type="radio" name="album[live]" value="false">
+      <br><br><br><br>
+      <input type="submit" value="<%= submit_button %>">
+      <br><br><br>
+    </label>
+  </form>
+
+  <form action="<%= bands_url %>" method="get">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="submit" value="Go to All Bands">
+  </form>

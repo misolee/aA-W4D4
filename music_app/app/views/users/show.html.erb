@@ -1,0 +1,17 @@
+<h1>Welcome to Music</h1>
+<br>
+<br>
+<%= current_user_id %>
+<br>
+<br>
+<form action="<%= session_url %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Sign Out">
+</form>
+<br>
+<br>
+<form action="<%= bands_url %>" method="get">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="submit" value="Go to All Bands">
+</form>

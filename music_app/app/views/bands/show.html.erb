@@ -1,0 +1,28 @@
+<h1><%= @band.name %></h1>
+<br>
+<h3>Origin: <%= @band.origin %></h3>
+<br>
+<br>
+<h3>Genre: <%= @band.genre %></h3>
+<br>
+<br>
+<h3>Members: <%= @band.members %></h3>
+<br>
+<br>
+<form action="<%= edit_band_url %>" method="get">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="submit" value="Edit Band">
+</form>
+<br>
+<br>
+<form action="<%= band_url %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Band">
+</form>
+<br>
+<br>
+<form action="<%= bands_url %>" method="get">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="submit" value="Go to All Bands">
+</form>

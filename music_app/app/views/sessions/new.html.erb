@@ -1,0 +1,26 @@
+<div id="signup">
+  <h1>Sign In</h1>
+
+  <form action="<%= session_url %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+    <label>
+      Email
+      <input type="text" name="user[email]">
+      <br>
+      <br>
+      Password
+      <input type="password" name="user[password]">
+      <br>
+      <br>
+      <% if flash.now[:errors] %>
+        <% flash.now[:errors].each do |error| %>
+          <%= error %>
+        <% end %>
+        <br>
+        <br>
+      <% end %>
+      <input type="submit" value="Sign In">
+    </label>
+  </form>
+</div>

@@ -1,0 +1,56 @@
+<% if action == :new %>
+  <% action_url = bands_url %>
+  <% submit_button = "Create New Band" %>
+  <% name = "" %>
+  <% origin = ""%>
+  <% genre = "" %>
+  <% members = "" %>
+<% else %>
+  <% action_url = band_url(@band) %>
+  <% submit_button = "Edit Band" %>
+  <% name = @band.name %>
+  <% origin = @band.origin %>
+  <% genre = @band.genre %>
+  <% members = @band.members %>
+<% end %>
+
+  <form action="<%= action_url %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+    <% if action == :edit %>
+      <%= @band.name %>
+      <br>
+      <br>
+      <input type="hidden" name="_method" value="patch">
+    <% end %>
+
+    <label>
+      Name
+      <input type="text" name="band[name]" value="<%= name %>">
+      <br>
+      <br>
+      <% if flash.now[:errors] %>
+        <% flash.now[:errors].each do |error| %>
+          <%= error %>
+        <% end %>
+      <% end %>
+      <br>
+      <br>
+      Origin
+      <input type="text" name="band[origin]" value="<%= origin %>">
+      <br><br><br><br>
+      Genre
+      <input type="text" name="band[genre]" value="<%= genre %>">
+      <br><br><br><br>
+      Members
+      <input type="text" name="band[members]" value="<%= members %>">
+      <br><br><br><br>
+      <input type="submit" value="<%= submit_button %>">
+      <br><br><br>
+    </label>
+  </form>
+
+  <form action="<%= bands_url %>" method="get">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="submit" value="Go to All Bands">
+  </form>
